@@ -72,7 +72,7 @@ public class ItemController {
 		// get item from database by id
 		Item existingItem = itemService.getItemById(id);
 		existingItem.setId(id);
-		existingItem.setFirstName(item.getFirstName());
+		existingItem.setDescription(item.getDescription());
 //		existingItem.setLastName(item.getLastName());
 //		existingItem.setEmail(item.getEmail());
 		

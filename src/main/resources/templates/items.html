@@ -53,9 +53,9 @@
 			
 			<tbody>
 				<tr th:each = "item: ${items}">
-					<td th:text = "${item.firstName}"></td>
+					<td th:text = "${item.description}"></td>
 				<!-- 	<td th:text = "${item.lastName}"></td>	-->
-					<td th:text = "${item.email}"></td> 
+					<td th:text = "${item.logDateUpd}"></td> 
 					<td>
 						<a th:href = "@{/items/edit/{id}(id=${item.id})}"
 						 class = "btn btn-primary">Update</a>
