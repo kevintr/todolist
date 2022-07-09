@@ -14,6 +14,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import org.springframework.security.core.userdetails.User;
+
 @Entity
 @Table(name = "item")
 public class Item {
@@ -32,18 +34,8 @@ public class Item {
 	@JoinColumn(name = "id_user")
 	private User user;
 	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public Item() {
-		
 	}
-	
 	public Item(String description, Date logDateUpd,User user) {
 		super();
 		this.description = description;
