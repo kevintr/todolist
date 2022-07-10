@@ -1,6 +1,8 @@
 package interview.javaguides.todolist.controller;
 
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,7 @@ public class ItemController {
 		return "items";
 	}
 	
+	
 	@GetMapping("/items/new")
 	public String createItemForm(Model model) {
 		logger.info("START createItemForm" );
@@ -57,7 +60,7 @@ public class ItemController {
 	public String editItemForm(@PathVariable Long id, Model model) {
 		logger.info("START editItemForm" );
 
-		model.addAttribute("item", itemService.getItemById(id));
+		model.addAttribute("item", itemService.getItemByIdAndLoggedUser(id));
 		
 		logger.info("END editItemForm" );
 		return "edit_item";
@@ -70,11 +73,9 @@ public class ItemController {
 		
 		logger.info("START updateItem" );
 		// get item from database by id
-		Item existingItem = itemService.getItemById(id);
+		Item existingItem = itemService.getItemByIdAndLoggedUser(id);
 		existingItem.setId(id);
 		existingItem.setDescription(item.getDescription());
-//		existingItem.setLastName(item.getLastName());
-//		existingItem.setEmail(item.getEmail());
 		
 		// save updated item object
 		itemService.updateItem(existingItem);
@@ -87,7 +88,9 @@ public class ItemController {
 	@GetMapping("/items/{id}")
 	public String deleteItem(@PathVariable Long id) {
 		logger.info("START deleteItem" );
-		itemService.deleteItemById(id);
+		Item existingItem = itemService.getItemByIdAndLoggedUser(id);
+		
+		itemService.deleteItem(existingItem);
 		logger.info("END deleteItem" );
 		return "redirect:/items";
 	}

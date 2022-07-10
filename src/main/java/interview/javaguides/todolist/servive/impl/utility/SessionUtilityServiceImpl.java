@@ -12,21 +12,20 @@ import interview.javaguides.todolist.entity.User;
 import interview.javaguides.todolist.repository.UserRepository;
 import interview.javaguides.todolist.service.SessionUtilityService;
 
-
- @Service
+@Service
 public class SessionUtilityServiceImpl implements SessionUtilityService {
-	
+
 	Logger logger = LoggerFactory.getLogger(SessionUtilityServiceImpl.class);
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
 	@Override
 	public User getUserByMail() {
 		String mail = SecurityContextHolder.getContext().getAuthentication().getName();
-		
+
 		List<User> userList = userRepository.findByEmail(mail);
-		logger.info("-------------------------------------------------------------------------- {}",mail);
+		logger.info("-------------------------------------------------------------------------- {}", mail);
 		return userList.get(0);
 	}
 }

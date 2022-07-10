@@ -28,7 +28,7 @@ public class UserController {
     
     @GetMapping("/login")
 	public String login() {
-    	logger.info("login--------------------------------------------");
+    	logger.info("login");
 		return "login";
 	}
 	

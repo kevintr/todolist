@@ -9,9 +9,9 @@ public interface ItemService {
 	
 	Item saveItem(Item student);
 	
-	Item getItemById(Long id);
+	Item getItemByIdAndLoggedUser(Long id);
 	
 	Item updateItem(Item student);
 	
-	void deleteItemById(Long id);
+	void deleteItem(Item item);
 }
