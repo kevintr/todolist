@@ -27,6 +27,8 @@
       <li class="nav-item">
         <a class="nav-link" th:href="@{/items}">Teacher Management</a>
       </li> -->
+      
+	<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -35,6 +37,7 @@
 		<div class = "row">
 			<h1> To Do List </h1>
 		</div>
+		
 		
 		<div class = "row">
 			<div class = "col-lg-3">
