@@ -20,8 +20,8 @@ public class AuthenticationManagerBuilderCustom {
 	    auth.jdbcAuthentication()
 	      .dataSource(dataSource)
 	      .withDefaultSchema()
-	      .withUser(User.withUsername("user")
-	        .password(passwordEncoder().encode("pass"))
+	      .withUser(User.withUsername("username")
+	        .password(passwordEncoder().encode("password"))
 	        .roles("USER"));
 	}
 

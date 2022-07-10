@@ -8,11 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
-import org.springframework.security.core.userdetails.User;
 
 @Entity
 @Table(name = "item")
@@ -28,6 +29,10 @@ public class Item {
 	@Column(name = "log_date_upd")
 	private Date logDateUpd;
 
+	@ManyToOne
+	@JoinColumn(name = "user")
+	private User user; 
+
 	public User getUser() {
 		return user;
 	}
@@ -35,7 +40,6 @@ public class Item {
 		this.user = user;
 	}
 
-	private User user;
 	
 	public Item() {
 	}

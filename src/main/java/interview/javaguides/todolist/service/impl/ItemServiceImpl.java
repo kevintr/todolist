@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import interview.javaguides.todolist.entity.Item;
+import interview.javaguides.todolist.entity.User;
 import interview.javaguides.todolist.repository.ItemRepository;
+import interview.javaguides.todolist.repository.UserRepository;
 import interview.javaguides.todolist.service.ItemService;
 
 @Service
@@ -19,21 +21,16 @@ public class ItemServiceImpl implements ItemService{
 	Logger logger = LoggerFactory.getLogger(ItemServiceImpl.class);
 	
 	
+	@Autowired
 	private ItemRepository itemRepository;
 	
-
-	
-	public ItemServiceImpl(ItemRepository itemRepository) {
-		super();
-		this.itemRepository = itemRepository;
-	}
+	@Autowired
+	private UserRepository userRepository;
 
 	@Override
 	public List<Item> getAllItems() {
 		List<Item> items = new ArrayList<>();
 		items = itemRepository.findAll();
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		logger.info(user.toString());
 		if(!items.isEmpty()) {
 			logger.info(items.toString());
 		}
@@ -42,9 +39,12 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public Item saveItem(Item item) {
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		logger.info(user.toString());
-		item.setUser(user);
+		String mail = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		List<User> userList = userRepository.findByEmail(mail);
+		logger.info("-------------------------------------------------------------------------- {}",mail);
+//		logger.info(user.toString());
+		item.setUser(userList.get(0));
 		return itemRepository.save(item);
 	}
 

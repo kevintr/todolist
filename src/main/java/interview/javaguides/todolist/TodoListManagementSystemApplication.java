@@ -22,8 +22,10 @@ public class TodoListManagementSystemApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		User user = new User("userdemo", "userdemo");
+		User user = new User("demo", "demo", "demo@demo.com", "$2a$12$6E2aX.XDYOraXtlR4F20TeQppuiedr0HOk8jANyclhwUtO7Xmefqy", null);
 		userRepository.save(user);
+		User user2 = new User("demo2", "demo2", "demo2@demo.com", "$2a$12$6E2aX.XDYOraXtlR4F20TeQppuiedr0HOk8jANyclhwUtO7Xmefqy", null);
+		userRepository.save(user2);
 	}
 
 
