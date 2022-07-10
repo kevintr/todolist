@@ -42,6 +42,9 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public Item saveItem(Item item) {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		logger.info(user.toString());
+		item.setUser(user);
 		return itemRepository.save(item);
 	}
 
